@@ -26,7 +26,7 @@ def show_main_menu():
             print("Phone Book is empty")
         else:
             print(file_contents)
-        contactsfile.close
+        #contactsfile.close
         end = input("Press Enter to continue ...")
         show_main_menu()
     elif choice == "2":
@@ -38,16 +38,30 @@ def show_main_menu():
 
 
 def addContact():
+
+    readContacts = open("contactlist.csv", "r+")
+    list_of_contacts = []
+    for line in readContacts:
+        stripped_line = line.strip()
+        line_list = stripped_line.split(', ')
+        list_of_contacts.append(line_list)
+
     Name = input("Name: ")
     Address = input("Address: ")
     Number = input("Number: ")
     Birthday = input("Birthday: ")
-    with open("contactlist.csv", 'w+') as contacts:
-        contacts.write('{}, {}, {}, {}\n'.format(Name, Address, Number, Birthday))
+
+    list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday)
+
+    with open("contactlist.csv", "w+") as f:
+        for item in list_of_contacts:
+            f.write("%s\n" % item)
+
     addAnother()
 
+
 def addAnother():
-    another = input("Would you like to add another contact? (Y or N) ")
+    another = input("\nWould you like to add another contact? (Y or N) ")
     if another == 'Y':
         addContact()
     elif another == 'N':
