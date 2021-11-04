@@ -36,7 +36,6 @@ def show_main_menu():
 
 
 
-
 def addContact():
 
     readContacts = open("contactList.txt", "r+")
@@ -44,10 +43,11 @@ def addContact():
     for line in readContacts:
         list_of_contacts.append(line)
 
-    Name = input("Name: ")
+    print("Please enter the following details below:")
+    Name = input("Full Name: ")
     Address = input("Address: ")
-    Number = input("Number: ")
-    Birthday = input("Birthday: ")
+    Number = input("Phone Number: ")
+    Birthday = input("Birthday (DD/MM/YYYY): ")
 
     list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
 
