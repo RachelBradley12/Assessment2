@@ -42,8 +42,6 @@ def addContact():
     readContacts = open("contactList.txt", "r+")
     list_of_contacts = []
     for line in readContacts:
-        #stripped_line = line.strip()
-        #line_list = stripped_line.split(', ')
         list_of_contacts.append(line)
 
     Name = input("Name: ")
@@ -51,29 +49,11 @@ def addContact():
     Number = input("Number: ")
     Birthday = input("Birthday: ")
 
-    list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday)
+    list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
 
     with open("contactList.txt", "w+") as f:
         for line in list_of_contacts:
-            #if len(line) == 4:
-                f.write("".join(line) + "\n")
-            #elif len(line) == 5:
-                #f.write("".join(line))
-
-        #for item in list_of_contacts:
-            #f.write("%s\n" % item)
-        #for item in list_of_contacts:
-            #for i in item:
-                #if i == "[" or i == "'" or i == "]":
-                    #pass
-                #else:
-
-
-
-                #f.write("%s\n" % item)
-                #list_of_contacts.append(item)
-            #list_of_contacts = "".join()
-        #print(list_of_contacts)
+            f.write("".join(line))
 
     addAnother()
 
