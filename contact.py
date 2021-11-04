@@ -20,7 +20,7 @@ def show_main_menu():
           "Enter 4 To Quit\n**********************")
     choice = input("Enter your choice: ")
     if choice == "1":
-        contactsfile = open("contactlist.csv", "w+")
+        contactsfile = open("contactList.csv", "w+")
         file_contents = contactsfile.read()
         if len(file_contents) == 0:
             print("Phone Book is empty")
@@ -39,7 +39,7 @@ def show_main_menu():
 
 def addContact():
 
-    readContacts = open("contactlist.csv", "r+")
+    readContacts = open("contactList.csv", "r+")
     list_of_contacts = []
     for line in readContacts:
         stripped_line = line.strip()
@@ -53,14 +53,20 @@ def addContact():
 
     list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday)
 
-    with open("contactlist.csv", "w+") as f:
+    with open("contactList.csv", "w+") as f:
         for item in list_of_contacts:
-            if item == "[]" or item == "'" or item == "[]":
-                pass
-            else:
-                f.write("%s\n" % item)
+            f.write("%s\n" % item)
+        #for item in list_of_contacts:
+            #for i in item:
+                #if i == "[" or i == "'" or i == "]":
+                    #pass
+                #else:
+
+
+
+                #f.write("%s\n" % item)
                 #list_of_contacts.append(item)
-        #list_of_contacts = "".join()
+            #list_of_contacts = "".join()
         #print(list_of_contacts)
 
     addAnother()
@@ -88,7 +94,7 @@ Please enter: "))
         rem_name = str(choice[1:])
         first_char = choice[0]
         search_name = first_char.upper() + rem_name
-        contactsfile = open("contactlist.csv", 'r+')
+        contactsfile = open("contactList.csv", 'r+')
         file_contents = contactsfile.readlines()
 
         found = False
