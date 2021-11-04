@@ -55,7 +55,13 @@ def addContact():
 
     with open("contactlist.csv", "w+") as f:
         for item in list_of_contacts:
-            f.write("%s\n" % item)
+            if item == "[]" or item == "'" or item == "[]":
+                pass
+            else:
+                f.write("%s\n" % item)
+                #list_of_contacts.append(item)
+        #list_of_contacts = "".join()
+        #print(list_of_contacts)
 
     addAnother()
 
