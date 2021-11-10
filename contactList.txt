@@ -1,5 +1,3 @@
-Rachel, 68 carhill road, 07702903235, 11/03/2003
-Max, 82 coleraine road, 07792537452, 14/03/2001
-zdfh, zdfh, dzfh, zdh
-asfg, dgh, d, sd
-DGH, DSH, DH, SDGH
+rachel, 68 carhill road, 07702903235, 11/03/2003
+max, 57 rainbow road, 02829557666, 17/05/1982
+john, 99 somerset road, 07704742437, 27/10/2001
