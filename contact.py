@@ -16,19 +16,24 @@ def show_main_menu():
           "Enter 1,2,3, or 4:\n"+
           "Enter 1 To Display Your Contacts Records\n" +
           "Enter 2 To Add a New Contact Record\n"+
-          "Enter 3 To search your contacts\n"+
-          "Enter 4 To Quit\n**********************")
+          "Enter 3 To Search your Contacts\n"+
+          "Enter 4 To Make Changes to your Contacts\n**********************")
     choice = input("Enter your choice: ")
     if choice == "1":
-        displayContacts()
+        display_contacts()
     elif choice == "2":
-        addContact()
+        add_contact()
     elif choice == "3":
         search_existing()
+    elif choice == "4":
+        change_contact()
+    else:
+        print("Error!\nPlease enter either numbers 1, 2, 3, or 4")
+        show_main_menu()
 
 
 
-def displayContacts():
+def display_contacts():
     contactsfile = open("contactList.txt", "r+")
     file_contents = contactsfile.read()
     if len(file_contents) == 0:
@@ -40,7 +45,7 @@ def displayContacts():
 
 
 
-def addContact():
+def add_contact():
     # This function writes the user inputs for each contact detail and write it into the text file
     readContacts = open("contactList.txt", "r+")
     list_of_contacts = []
@@ -59,14 +64,14 @@ def addContact():
         for line in list_of_contacts:
             f.write("".join(line))
 
-    addAnother()
+    add_another()
 
 
-def addAnother():
+def add_another():
     # This function asks the user if they would like to add another contact
     another = input("\nWould you like to add another contact? (Y or N) ")
     if another == 'Y':
-        addContact()
+        add_contact()
     elif another == 'N':
         show_main_menu()
 
@@ -182,9 +187,36 @@ Please enter: "))
         # closing text file
         contactsfile.close()
 
+    else:
+        print("Error!\nPlease enter either numbers 1, 2, 3, or 4\nPlease Return to Main Menu and Try Again. . . . .")
+        show_main_menu()
+
     input("Press Enter to return to Main Menu ...")
     show_main_menu()
 
 
+def change_contact():
+    # This function searches for changing details of an existing contact
+    contact = str(input("Enter the Name of the Contact whose details you wish to change: "))
+    contactsfile = open("contactList.txt", "r+")
+
+    # setting flag to 0
+    flag = 0
+
+    # Loop through the file line by line
+    for line in contactsfile:
+
+        # checking string is present in line or not
+        if contact in line:
+            flag = 1
+            break
+
+    # checking condition for string found or not
+    if flag == 0:
+        print("Contact Name, ", contact, ", Not Found in Contacts Book")
+    else:
+        # HERE IS WHERE WE CHANGE THE CONTACT DETAILS******
+        print("Contact Name, ", contact, ", Found!")
+        # HERE IS WHERE WE CHANGE THE CONTACT DETAILS******
 
 show_main_menu()
