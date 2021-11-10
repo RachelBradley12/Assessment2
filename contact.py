@@ -1,3 +1,6 @@
+import csv
+
+
 class Contact:
 
      def __innit__(self, name, address, number, birthday):
@@ -199,6 +202,9 @@ def change_contact():
     # This function searches for changing details of an existing contact
     contact = str(input("Enter the Name of the Contact whose details you wish to change: "))
     contactsfile = open("contactList.txt", "r+")
+    list_of_contacts = []
+    for line in contactsfile:
+        list_of_contacts.append(line)
 
     # setting flag to 0
     flag = 0
@@ -217,6 +223,12 @@ def change_contact():
     else:
         # HERE IS WHERE WE CHANGE THE CONTACT DETAILS******
         print("Contact Name, ", contact, ", Found!")
-        # HERE IS WHERE WE CHANGE THE CONTACT DETAILS******
+        change = str(input("What details  do you wish to change of this contact?\n\n\
+                            Name: 1\nAddress: 2\nPhone Number: 3\nBirthday: 4\n\n\
+                            Please enter: "))
+        if change == 1:
+            list_of_contacts[1]
+
+
 
 show_main_menu()
