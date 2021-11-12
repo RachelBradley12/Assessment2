@@ -1,5 +1,5 @@
-import csv
-
+import re
+import datetime
 
 class Contact:
 
@@ -8,7 +8,6 @@ class Contact:
          self.address = address
          self.number = number
          self.birthday = birthday
-
 
 
 def show_main_menu():
@@ -37,7 +36,7 @@ def show_main_menu():
 
 
 def display_contacts():
-    contactsfile = open("contactList.csv", "r+")
+    contactsfile = open("contactList.txt", "r+")
     file_contents = contactsfile.read()
     if len(file_contents) == 0:
         print("Phone Book is empty")
@@ -47,25 +46,24 @@ def display_contacts():
     show_main_menu()
 
 
-
 def add_contact():
     # This function writes the user inputs for each contact detail and write it into the text file
-    readContacts = open("contactList.csv", "r+")
+    readContacts = open("contactList.txt", "r+")
     list_of_contacts = []
     for line in readContacts:
         list_of_contacts.append(line)
 
     print("Please enter the following details below:")
-    Name = input("Full Name: ")
-    Address = input("Address: ")
+    Name = input("Full Name: ").title()
+    Address = input("Address: ").title()
     Number = input("Phone Number: ")
     Birthday = input("Birthday (DD/MM/YYYY): ")
 
     list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
 
-    with open("contactList.csv", "w+") as f:
+    with open("contactList.txt", "w+") as f:
         for line in list_of_contacts:
-            f.write("".join(line))
+                f.write("".join(line))
 
     add_another()
 
@@ -91,7 +89,7 @@ Please enter: "))
     if choice == 1:
         # This will execute for searches based on contact name
         searched_name = str(input("Please enter the name of the contact you wish to search: "))
-        contactsfile = open("contactList.csv", "r+")
+        contactsfile = open("contactList.txt", "r+")
 
         # setting flag to 0
         flag = 0
@@ -99,8 +97,8 @@ Please enter: "))
         # Loop through the file line by line
         for line in contactsfile:
 
-            # checking string is present in line or not
-            if searched_name in line:
+            # checking exact string is present in line or not
+            if re.search(r"\b{}\b".format(searched_name),line):
                 flag = 1
                 break
 
@@ -117,7 +115,7 @@ Please enter: "))
     elif choice == 2:
         # This will execute for searches based on contact address
         searched_address = str(input("Please enter the address of the contact you wish to search: "))
-        contactsfile = open("contactList.csv", "r+")
+        contactsfile = open("contactList.txt", "r+")
 
         # setting flag to 0
         flag = 0
@@ -125,8 +123,8 @@ Please enter: "))
         # Loop through the file line by line
         for line in contactsfile:
 
-            # checking string is present in line or not
-            if searched_address in line:
+            # checking exact string is present in line or not
+            if re.search(r"\b{}\b".format(searched_address),line):
                 flag = 1
                 break
 
@@ -143,7 +141,7 @@ Please enter: "))
     elif choice == 3:
         # This will execute for searches based on contact phone number
         searched_number = str(input("Please enter the phone number of the contact you wish to search: "))
-        contactsfile = open("contactList.csv", "r+")
+        contactsfile = open("contactList.txt", "r+")
 
         # setting flag to 0
         flag = 0
@@ -151,8 +149,8 @@ Please enter: "))
         # Loop through the file line by line
         for line in contactsfile:
 
-            # checking string is present in line or not
-            if searched_number in line:
+            # checking exact string is present in line or not
+            if re.search(r"\b{}\b".format(searched_number),line):
                 flag = 1
                 break
 
@@ -168,7 +166,7 @@ Please enter: "))
     elif choice == 4:
         # This will execute for searches based on contact phone number
         searched_birthday = str(input("Please enter the birthday of the contact you wish to search: "))
-        contactsfile = open("contactList.csv", "r+")
+        contactsfile = open("contactList.txt", "r+")
 
         # setting flag to 0
         flag = 0
@@ -176,8 +174,8 @@ Please enter: "))
         # Loop through the file line by line
         for line in contactsfile:
 
-            # checking string is present in line or not
-            if searched_birthday in line:
+            # checking exact string is present in line or not
+            if re.search(r"\b{}\b".format(searched_birthday),line):
                 flag = 1
                 break
 
@@ -201,17 +199,13 @@ Please enter: "))
 def change_contact():
     # This function searches for changing details of an existing contact
     contact = str(input("Enter the Name of the Contact whose details you wish to change: "))
-    contactsfile = open("contactList.csv", "r+")
-    list_of_contacts = []
-    for line in contactsfile:
-        list_of_contacts.append(line)
+    contactsfile = open("contactList.txt", "r+")
 
     # setting flag to 0
     flag = 0
 
     # Loop through the file line by line
     for line in contactsfile:
-
         # checking string is present in line or not
         if contact in line:
             flag = 1
@@ -223,20 +217,34 @@ def change_contact():
     else:
         # HERE IS WHERE WE CHANGE THE CONTACT DETAILS******
         print("Contact Name, ", contact, ", Found!")
-        change = str(input("What details  do you wish to change of this contact?\n\n\
-                             Name: 1\nAddress: 2\nPhone Number: 3\nBirthday: 4\n\n\
-                             Please enter: "))
+        change = int(input("\nWhat details  do you wish to change of this contact?\n\nName: 1\nAddress: 2\nPhone Number: 3\nBirthday: 4\n\nPlease enter: "))
+
         if change == 1:
             new_name = str(input("Updated Contact Name: "))
-
-            text = open("contactList.csv", "r")
-
+            text = open("contactList.txt", "r")
             text = ''.join([i for i in text])
-
             text = text.replace(contact, new_name)
 
-            x = open ("contactList.csv", "w")
+            x = open ("contactList.txt", "w")
+            x.writelines(text)
+            x.close()
 
+
+
+
+
+
+
+
+
+
+        if change == 2:
+            new_address = str(input("Updated Contact Address: "))
+            text = open("contactList.txt", "r")
+            text = ''.join([i for i in text])
+            text = text.replace(contact, new_address)
+
+            x = open("contactList.txt", "w")
             x.writelines(text)
             x.close()
 
