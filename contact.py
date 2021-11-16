@@ -1,5 +1,4 @@
 import re
-import datetime
 
 class Contact:
 
@@ -41,6 +40,7 @@ def display_contacts():
     if len(file_contents) == 0:
         print("Phone Book is empty")
     else:
+        print("Name:, Address:, Number:, Birthday:")
         print(file_contents)
     input("Press Enter to return to Main Menu ...")
     show_main_menu()
@@ -59,14 +59,28 @@ def add_contact():
     Number = input("Phone Number: ")
     Birthday = input("Birthday (DD/MM/YYYY): ")
 
-    list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
-
-    with open("contactList.txt", "w+") as f:
-        for line in list_of_contacts:
+    if Name != "" and Address != "" and Number != "" and Number != "" and Birthday != "":
+        list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
+        with open("contactList.txt", "w+") as f:
+            for line in list_of_contacts:
                 f.write("".join(line))
+    elif Name == "":
+        empty_error()
+    elif any(char.isdigit() for char in Name):
+        print("\nError! Names cannot contain digits!")
+        input("Please press Enter to try again...")
+    elif Address == "":
+        empty_error()
+    elif Number == "":
+        empty_error()
+    elif Birthday == "":
+        empty_error()
 
     add_another()
 
+def empty_error():
+    print("\nError! You cannot leave a field empty")
+    input("Please press Enter to try again...")
 
 def add_another():
     # This function asks the user if they would like to add another contact
@@ -75,7 +89,9 @@ def add_another():
         add_contact()
     elif another == 'N':
         show_main_menu()
-
+    else:
+        print("\nInvalid input!")
+        input("Please press Enter to return to the Main Menu and try again...")
 
 
 
@@ -229,6 +245,8 @@ def change_contact():
             x.writelines(text)
             x.close()
 
+            input("Name changed! Press Enter to return to the Main Menu")
+
 
 
 
@@ -239,14 +257,34 @@ def change_contact():
 
 
         if change == 2:
-            new_address = str(input("Updated Contact Address: "))
-            text = open("contactList.txt", "r")
-            text = ''.join([i for i in text])
-            text = text.replace(contact, new_address)
+            with open('contactList.txt') as f:
+                lines = f.read().splitlines()
+                print(lines)
+                contact_editing = lines.index(contact)
+                print(contact_editing)
 
-            x = open("contactList.txt", "w")
-            x.writelines(text)
-            x.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            # new_address = str(input("Updated Contact Address: "))
+            # text = open("contactList.txt", "r")
+            # text = ''.join([i for i in text])
+            # text = text.replace(contact, new_address)
+            #
+            # x = open("contactList.txt", "w")
+            # x.writelines(text)
+            # x.close()
 
 
 
