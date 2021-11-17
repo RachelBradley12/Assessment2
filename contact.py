@@ -19,7 +19,8 @@ def show_main_menu():
           "Enter 1 To Display Your Contacts Records\n" +
           "Enter 2 To Add a New Contact Record\n"+
           "Enter 3 To Search your Contacts\n"+
-          "Enter 4 To Make Changes to your Contacts\n**********************")
+          "Enter 4 To Make Changes to your Contacts\n"+
+          "Enter 5 To Remove a Contact\n**********************")
     choice = input("Enter your choice: ")
     if choice == "1":
         display_contacts()
@@ -29,6 +30,8 @@ def show_main_menu():
         search_existing()
     elif choice == "4":
         change_details()
+    elif choice == "5":
+        remove_contact()
     else:
         print("Error!\nPlease enter either numbers 1, 2, 3, or 4")
         show_main_menu()
@@ -70,7 +73,7 @@ def add_contact():
 
     if (isValidDate == True):
 
-        if Name != "" and Address != "" and Number != "" and Number != "" and Birthday != "":
+        if Name != "" and Address != "" and Number != "" and Birthday != "":
             list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
             with open("contactList.txt", "w+") as f:
                 for line in list_of_contacts:
@@ -90,13 +93,6 @@ def add_contact():
         print("\nError! Input date is not valid..")
 
     add_another()
-
-
-
-
-
-
-
 
 def empty_error():
     print("\nError! You cannot leave a field empty")
@@ -244,7 +240,7 @@ def change_details():
 
         for contact in iterate_list:
             if searched_name in contact:
-                detail_to_change = input("\nWhat details  do you wish to change of this contact?\n\nName: 1\nAddress: 2\nPhone Number: 3\nBirthday: 4\n\nPlease enter: ")
+                detail_to_change = input("\nWhat details  do you wish to change of this contact?\n\nName: 1\nAddress: 2\nPhone Number: 3\nBirthday (DD/MM/YYYY): 4\n\nPlease enter: ")
 
                 print(contact)
 
@@ -261,34 +257,85 @@ def change_details():
         for x in iterate_list:
             print(*x)
 
+    with open("contactList.txt", "w+") as f:
+        for list in iterate_list:
+            f.write(str(", ".join(list)) + '\n')
 
-        with open("contactList.txt", "w+") as f:
-            for list in iterate_list:
-                    f.write(str(", ".join(list)) + '\n')
 
-
-        contactsfile = open("contactList.txt", "r+")
-
-        # setting flag to 0
-        flag = 0
-
-        # Loop through the file line by line
-        for line in contactsfile:
-
-            # checking exact string is present in line or not
-            if re.search(r"\b{}\b".format(contact), line):
-                flag = 1
-                break
-
-        # checking condition for string found or not
-        if flag == 0:
-            print("\nError! Contact details could not be edited")
-        else:
-            print("\nContact details edited successfully!")
-        # closing text file
-        contactsfile.close()
-
-    input("Press Enter to return to Main Menu ...")
+    input("\nChange made successfully ...\nPress Enter to return to Main Menu ...")
     show_main_menu()
+
+
+
+def remove_contact():
+    with open("contactList.txt", "r") as f:
+        lines = f.readlines()
+        print(lines)
+        name_to_remove = input("Please enter the name of the contact who you wish to remove: ")
+
+    contactsfile = open("contactList.txt", "r+")
+
+    # setting flag to 0
+    flag = 0
+
+    # Loop through the file line by line
+    for line in contactsfile:
+
+        # checking exact string is present in line or not
+        if re.search(r"\b{}\b".format(name_to_remove), line):
+            flag = 1
+            break
+
+    # checking condition for string found or not
+    if flag == 0:
+        print("Contact, ", name_to_remove, ", Not Found in Contacts Book")
+        input("\nPress Enter to return to Main Menu ...")
+        show_main_menu()
+    else:
+        print("Contact, ", name_to_remove, ", Found!")
+        with open("contactList.txt", "w") as f:
+            for line in lines:
+                if (line.split(",")[0])!= name_to_remove:
+                    f.write(line)
+                    print("\nContact removed successfully! ...\nPress Enter to return to Main Menu ...")
+
+    # closing text file
+    contactsfile.close()
+    show_main_menu()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #     iterate_list = []
+    #     for contact in lines:
+    #         contact = contact.split(", ")
+    #         iterate_list.append(contact)
+    #
+    #     for contact in iterate_list:
+    #         if name_to_remove in contact:
+    #             del contact[0]
+    #             del contact[1]
+    #             del contact[2]
+    #             del contact[3]
+    #
+    #     for x in iterate_list:
+    #         print(*x)
+    #
+    # with open("contactList.txt", "w+") as f:
+    #     for list in iterate_list:
+    #         f.write(str(", ".join(list)) + '\n')
+
 
 show_main_menu()

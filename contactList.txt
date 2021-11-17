@@ -1,6 +1,2 @@
 Rachel, 68 carhill road, 07702903235, 11/03/2003
-Max, 57 rainbow road, 02829557666, 17/05/1982
-James, 99 somerset road, 07704742437, 27/10/2001
-Rachel Brown, 68 Rainbow Lane, 07702903235, 11/02/2004
-Elaine, 77 Monday Road, 07702329045, 13/02/1999
-Holly Davis, 77 Tuesday Road, 02893026354, 11/02/2003
+John, 99 somerset road, 07704742437, 27/10/2001
