@@ -33,7 +33,7 @@ def show_main_menu():
     elif choice == "5":
         remove_contact()
     else:
-        print("Error!\nPlease enter either numbers 1, 2, 3, or 4")
+        print("Error!\nPlease enter either numbers 1, 2, 3, 4, or 5")
         show_main_menu()
 
 
@@ -302,40 +302,6 @@ def remove_contact():
     # closing text file
     contactsfile.close()
     show_main_menu()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    #     iterate_list = []
-    #     for contact in lines:
-    #         contact = contact.split(", ")
-    #         iterate_list.append(contact)
-    #
-    #     for contact in iterate_list:
-    #         if name_to_remove in contact:
-    #             del contact[0]
-    #             del contact[1]
-    #             del contact[2]
-    #             del contact[3]
-    #
-    #     for x in iterate_list:
-    #         print(*x)
-    #
-    # with open("contactList.txt", "w+") as f:
-    #     for list in iterate_list:
-    #         f.write(str(", ".join(list)) + '\n')
 
 
 show_main_menu()
