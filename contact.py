@@ -1,4 +1,5 @@
 import re
+import datetime
 
 class Contact:
 
@@ -59,24 +60,43 @@ def add_contact():
     Number = input("Phone Number: ")
     Birthday = input("Birthday (DD/MM/YYYY): ")
 
-    if Name != "" and Address != "" and Number != "" and Number != "" and Birthday != "":
-        list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
-        with open("contactList.txt", "w+") as f:
-            for line in list_of_contacts:
-                f.write("".join(line))
-    elif Name == "":
-        empty_error()
-    elif any(char.isdigit() for char in Name):
-        print("\nError! Names cannot contain digits!")
-        input("Please press Enter to try again...")
-    elif Address == "":
-        empty_error()
-    elif Number == "":
-        empty_error()
-    elif Birthday == "":
-        empty_error()
+    day, month, year = Birthday.split('/')
+
+    isValidDate = True
+    try:
+        datetime.datetime(int(year), int(month), int(day))
+    except ValueError:
+        isValidDate = False
+
+    if (isValidDate == True):
+
+        if Name != "" and Address != "" and Number != "" and Number != "" and Birthday != "":
+            list_of_contacts.append(Name + ", " + Address + ", " + Number + ", " + Birthday + "\n")
+            with open("contactList.txt", "w+") as f:
+                for line in list_of_contacts:
+                    f.write("".join(line))
+        elif Name == "":
+            empty_error()
+        elif any(char.isdigit() for char in Name):
+            print("\nError! Names cannot contain digits!")
+            input("Please press Enter to try again...")
+        elif Address == "":
+            empty_error()
+        elif Number == "":
+            empty_error()
+        elif Birthday == "":
+            empty_error()
+    else:
+        print("\nError! Input date is not valid..")
 
     add_another()
+
+
+
+
+
+
+
 
 def empty_error():
     print("\nError! You cannot leave a field empty")
