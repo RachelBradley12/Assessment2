@@ -120,7 +120,7 @@ Please enter: "))
 
     if choice == 1:
         # This will execute for searches based on contact name
-        searched_name = str(input("Please enter the name of the contact you wish to search: "))
+        searched_name = str(input("Please enter the name of the contact you wish to search: ")).title()
         contactsfile = open("contactList.txt", "r+")
 
         # setting flag to 0
@@ -146,7 +146,7 @@ Please enter: "))
 
     elif choice == 2:
         # This will execute for searches based on contact address
-        searched_address = str(input("Please enter the address of the contact you wish to search: "))
+        searched_address = str(input("Please enter the address of the contact you wish to search: ")).title()
         contactsfile = open("contactList.txt", "r+")
 
         # setting flag to 0
@@ -231,7 +231,7 @@ Please enter: "))
 def change_details():
     with open('contactList.txt') as f:
         contact_data = f.read().splitlines()
-        searched_name = str(input("Enter the Name of the Contact whose details you wish to change: "))
+        searched_name = str(input("Enter the Name of the Contact whose details you wish to change: ")).title()
 
         iterate_list = []
         for contact in contact_data:
@@ -245,9 +245,9 @@ def change_details():
                 print(contact)
 
                 if detail_to_change == "1":
-                    contact[0] = input("\nChange " + contact[0] + " to what?:  ")
+                    contact[0] = input("\nChange " + contact[0] + " to what?:  ").title()
                 elif detail_to_change == "2":
-                    contact[1] = input("\nChange " + contact[1] + " to what?:  ")
+                    contact[1] = input("\nChange " + contact[1] + " to what?:  ").title()
                 elif detail_to_change == "3":
                     contact[2] = input("\nChange " + contact[2] + " to what?:  ")
                 elif detail_to_change == "4":
@@ -271,7 +271,7 @@ def remove_contact():
     with open("contactList.txt", "r") as f:
         lines = f.readlines()
         print(lines)
-        name_to_remove = input("Please enter the name of the contact who you wish to remove: ")
+        name_to_remove = input("Please enter the name of the contact who you wish to remove: ").title()
 
     contactsfile = open("contactList.txt", "r+")
 
